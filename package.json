@@ -1,0 +1,54 @@
+{
+  "name": "devsy-replaceme",
+  "version": "1.0.0",
+  "description": "Boilerplate for devsy libraries",
+  "main": "lib/index.js",
+  "scripts": {
+    "phoenix": "rimraf node_modules && npm install",
+    "clean": "rimraf lib dist coverage",
+    "lib": "npm run lib:scss && npm run lib:js",
+    "lib:js": "babel src --out-dir lib",
+    "lib:scss": "copyfiles -u 1 './src/**/*.scss' lib",
+    "lib:js:watch": "npm run lib:js -- -w",
+    "build:umd": "npm run build && npm run build:prod",
+    "build": "NODE_ENV=production webpack --config webpack.config.base.babel.js",
+    "build:prod": "NODE_ENV=production webpack --config webpack.config.prod.babel.js",
+    "lint": "standard --verbose | ./node_modules/.bin/snazzy",
+    "test": "NODE_ENV=test mocha",
+    "test:watch": "NODE_ENV=test mocha --watch",
+    "start": "webpack-dev-server --config webpack.config.dev.babel.js",
+    "prepublish": "npm run lint && npm run test && npm run clean && npm run build && npm run build:umd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:devsy-io/devsy-replaceme.git"
+  },
+  "keywords": [
+    "devsy-replaceme-keywords"
+  ],
+  "author": "devsy-replaceme-author",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devsy-io/devsy-replaceme.git/issues"
+  },
+  "homepage": "https://github.com/devsy-io/devsy-replaceme.git",
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
+    "mocha": "^2.5.3",
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "standard": {
+    "globals": [
+      "it",
+      "describe"
+    ]
+  }
+}
